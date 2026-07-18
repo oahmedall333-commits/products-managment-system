@@ -45,7 +45,7 @@ function validate_image($image){
     return null;
 }
 
-function validate_product($name,$price,$stock,$category,$image){
+function validate_product($name,$price,$stock,$category,$image,$image_required = true){
     $fields = [
     'name' => $name,
     'price' => $price,
@@ -72,8 +72,17 @@ function validate_product($name,$price,$stock,$category,$image){
     if($error = validate_category($category)){
         return $error;
     }
-    if($error = validate_image($image)){
+    if($image_required){
+      if($error = validate_image($image)){
         return $error;
     }
+    }else{
+        if($image['error'] != UPLOAD_ERR_NO_FILE){
+          if($error = validate_image($image)){
+          return $error;
+        }
+    }
+}
     return null;
+
 }
