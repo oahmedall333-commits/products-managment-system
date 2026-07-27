@@ -1,23 +1,6 @@
 <?php 
 
-session_start();
 include(BASE_PATH."core/database.php");
-;
-function set_message($type,$message){
-    $_SESSION['message']=[
-        'type'=>$type,
-        'text'=>$message
-    ];
-}
-
-function show_message(){
-    if(isset($_SESSION['message'])){
-        $type = $_SESSION['message']['type']; 
-        $message = $_SESSION['message']['text']; 
-        echo "<div class='alert alert-$type'> $message</div>";
-        unset($_SESSION['message']);
-    }
-}
 
 function create_product($conn,$name,$description,$price,$stock,$category,$image){
    $sql = "INSERT INTO `products`(name,description,price,stock,cat_id,image)
@@ -41,6 +24,7 @@ function get_all_products(){
         $products[] = $row;
     }
     return $products;
+
 }
 
 function show_product($id){
@@ -48,7 +32,6 @@ function show_product($id){
     $sql = "SELECT products.*,categories.name AS category_name FROM products  JOIN categories on products.cat_id = categories.id where products.id=$id";
     $result = mysqli_query($conn,$sql);
     if(!$result){
-        set_message('danger',"Error in DB");
         return false;
     }
     if($product = mysqli_fetch_assoc($result)){
@@ -73,4 +56,22 @@ function delete_product($conn,$id){
     $result = mysqli_query($conn,$sql);
 
     return $result;
+}
+
+function get_user_by_email($conn,$email){
+    $sql = "SELECT * FROM `users` WHERE email='$email'";
+    $result = mysqli_query($conn,$sql);
+    if(!$result){
+        return NULL;
+    }
+  return mysqli_fetch_assoc($result);
+}
+
+function create_user($conn,$name,$email,$password){
+    $sql = "INSERT INTO `users` (name,email,password) VALUES ('$name','$email','$password')";
+    $result = mysqli_query($conn,$sql);
+    if(!$result){
+        return NULL;
+    }
+    return true;
 }

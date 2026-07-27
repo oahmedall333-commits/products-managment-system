@@ -1,5 +1,6 @@
 <?php 
     include(BASE_PATH."core/functions.php");
+    include(BASE_PATH."core/session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

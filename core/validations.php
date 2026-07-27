@@ -1,6 +1,6 @@
 <?php
 
-
+// start validate product
 function validate_required(string $value,string $fieldName){
     return (!empty(trim($value)))? null : "$fieldName is required";
 }
@@ -13,6 +13,7 @@ function validate_min_length($value,$min){
     return !(strlen(trim($value))<$min)? null : "name must be greater than $min characters";
 }
 
+
 function validate_price($price){
     $price = trim($price);
     return (is_numeric($price) && $price > 0)? null : "price must be positive number";
@@ -23,10 +24,12 @@ function validate_stock($stock){
     return (filter_var($stock,FILTER_VALIDATE_INT) !== false && $stock >= 0)? null: "Stock must be a non-negative integer.";
 }
 
+
 function validate_category($category){
     $allowed_category = [1, 2, 3, 4];
     return (in_array($category,$allowed_category))? null : "Please select a valid category.";
 }
+
 
 function validate_image($image){
     $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
@@ -86,3 +89,67 @@ function validate_product($name,$price,$stock,$category,$image,$image_required =
     return null;
 
 }
+
+// end validate product
+
+// start validate user register
+function validate_email($email){
+    return(filter_var($email,FILTER_VALIDATE_EMAIL)) ? NULL : "Email Not Valid";
+}
+
+function validate_password($password){
+    if(strlen($password) < 8){
+        return "Password must be at least 8 characters";
+    }
+    if (!preg_match('/[A-Z]/', $password)) {
+        return "Password must contain at least one uppercase letter";
+    }
+
+    if (!preg_match('/[a-z]/', $password)) {
+        return "Password must contain at least one lowercase letter";
+    }
+
+    if (!preg_match('/[0-9]/', $password)) {
+        return "Password must contain at least one number";
+    }
+
+    if (!preg_match('/[\W_]/', $password)) {
+        return "Password must contain at least one special character";
+    }
+
+    return null;
+}
+
+function validate_confirm_password($password,$confirm_password){
+    return($password !== $confirm_password)? "Password do not match": NULL;
+}
+
+function validate_register($name,$email,$password,$confirm_password){
+$fields = [
+    'Name' => $name,
+    'Email' => $email,
+    'Password' => $password,
+    'Confirm Password' => $confirm_password
+];
+ foreach($fields as $fieldname => $value){
+    if($error = validate_required($value,$fieldname)){
+        return $error;
+    }
+ }
+ 
+ if($error = validate_email($email)){
+    return $error;
+ }
+
+ if($error = validate_password($password)){
+    return $error;
+ }
+ if( $error = validate_confirm_password($password,$confirm_password)){
+    return $error;
+ }
+ return NULL;
+}
+
+
+
+// end validate user register
