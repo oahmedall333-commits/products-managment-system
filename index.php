@@ -1,5 +1,7 @@
-<?php require_once ('inc/header.php'); ?>
-
+<?php
+include (__DIR__."/core/config.php");
+require_once ('inc/header.php'); 
+?>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">

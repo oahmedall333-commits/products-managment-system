@@ -149,6 +149,21 @@ $fields = [
  }
  return NULL;
 }
+function validate_login($email,$password){
+    $fields = ['email'=>$email,
+               'password'=>$password];
+    foreach($fields as $fieldname => $value){
+            if($error = validate_required($value,$fieldname)){
+                return $error;
+            }
+        if($error = validate_email($email)){
+            return $error;
+        }
+
+    }
+    return null;
+
+ }
 
 
 

@@ -1,6 +1,7 @@
 <?php
 include(__DIR__ . "/../../../core/config.php");
 include(BASE_PATH . "inc/header.php");
+admin();
 ?>
 
 <div class="container mt-5">

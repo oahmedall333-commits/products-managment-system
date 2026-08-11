@@ -75,3 +75,22 @@ function create_user($conn,$name,$email,$password){
     }
     return true;
 }
+
+function update_remember_token($conn,$user_id,$token){
+    $sql = "UPDATE `users` SET remember_token = '$token' WHERE id = $user_id";
+    return mysqli_query($conn,$sql);
+
+}
+ function get_user_by_remember_token($conn,$token){
+    $sql = "SELECT * FROM `users` WHERE remember_token = '$token' LIMIT 1";
+    $result = mysqli_query($conn,$sql);
+    if($result && mysqli_num_rows($result) >0){
+        return mysqli_fetch_assoc($result);
+    }
+    return null;
+ }
+
+ function delete_user_by_remember_token($conn,$user_id){
+    $sql = "UPDATE `users` SET remember_token = NULL WHERE id = $user_id";
+    return mysqli_query($conn,$sql);
+ }

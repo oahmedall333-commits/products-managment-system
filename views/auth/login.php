@@ -2,7 +2,9 @@
 <?php
 include(__DIR__."/../../core/config.php");
 include(BASE_PATH."inc/header.php");
+guest();
 ?>
+
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
@@ -21,6 +23,7 @@ include(BASE_PATH."inc/header.php");
                                 type="email"
                                 class="form-control"
                                 id="email"
+                                value="<?= old('email'); ?>";
                                 name="email"
                                 placeholder="Enter your email">
                         </div>
@@ -41,7 +44,8 @@ include(BASE_PATH."inc/header.php");
                             <input
                                 class="form-check-input"
                                 type="checkbox"
-                                id="remember">
+                                id="remember"
+                                name="remember">
                             <label class="form-check-label" for="remember">
                                 Remember Me
                             </label>
@@ -73,4 +77,5 @@ include(BASE_PATH."inc/header.php");
         </div>
     </div>
 </div>
+<?php clear_old();  ?>
 <?php include(BASE_PATH."inc/footer.php"); ?>

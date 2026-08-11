@@ -1,6 +1,7 @@
 <?php
 include(__DIR__ . "/../../../core/config.php");
 include(BASE_PATH . "inc/header.php");
+admin();
 
 if(!isset($_GET['id'])){
     set_message("danger","ID Not Exists");

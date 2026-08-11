@@ -1,6 +1,8 @@
 <?php 
+    include(BASE_PATH."core/database.php");
     include(BASE_PATH."core/functions.php");
     include(BASE_PATH."core/session.php");
+    auto_login($conn);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +75,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="btn btn-outline-danger ms-2" href="logout.php">
+                    <a class="btn btn-outline-danger ms-2" href="<?= BASE_URL?>handlers/auth/logout.php">
                         Logout
                     </a>
                 </li>
