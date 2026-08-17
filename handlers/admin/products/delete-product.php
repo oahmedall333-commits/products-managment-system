@@ -1,6 +1,7 @@
 <?php
 include __DIR__.'/../../../core/config.php';
 include BASE_PATH.'core/functions.php';
+include BASE_PATH.'core/session.php';
 
 if(!isset($_GET['id'])){
     set_message('danger',"ID Not Exists");

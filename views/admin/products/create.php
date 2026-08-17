@@ -3,6 +3,8 @@
       include(BASE_PATH."inc/header.php");
       admin();
 ?>
+
+
 <div class="container mt-5">
 
     <div class="row justify-content-center">
@@ -63,7 +65,10 @@
                             </div>
 
                         </div>
+                        <?php  
+                        $categories = get_all_categories($conn);
 
+                        ?>
                         <!-- Category -->
                         <div class="mb-3">
                             <label class="form-label">Category</label>
@@ -73,11 +78,9 @@
                                 class="form-select">
 
                                 <option selected disabled>Select Category</option>
-                                <option value="1">Laptop</option>
-                                <option value="2">PC</option>
-                                <option value="3">Phones</option>
-                                <option value="4">TV</option>
-
+                                <?php foreach($categories as $category):  ?>
+                                <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 

@@ -3,6 +3,7 @@ include(__DIR__."/../../../core/config.php");
 include(BASE_PATH."core/functions.php");
 include(BASE_PATH."core/database.php");
 include(BASE_PATH."core/validations.php");
+include(BASE_PATH."core/session.php");
 if($_SERVER['REQUEST_METHOD'] === "POST"){
     $name = $_POST['Pname'];
     $description = $_POST['Pdescription'];
@@ -23,7 +24,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
     }
     move_uploaded_file($image_tmp,$distension);
 
-    create_product($conn,$name,$description,$price,$stock,$category,$image_name);
+   if(create_product($conn,$name,$description,$price,$stock,$category,$image_name)){
+     set_message("success","Product added successfully");
+   }else{
+     set_message("danger","failed to added successfully");
+   }
         header("location:".BASE_URL."views/admin/products/index.php");
         exit;
 }

@@ -4,6 +4,7 @@ include(__DIR__."/../../../core/config.php");
 include(BASE_PATH."core/database.php");
 include(BASE_PATH."core/functions.php");
 include(BASE_PATH."core/validations.php");
+include(BASE_PATH."core/session.php");
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $id = $_POST['id'];

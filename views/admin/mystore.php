@@ -27,6 +27,16 @@ admin();
                     Add Product
                 </a>
 
+                <a href="categories/index.php" class="list-group-item list-group-item-action">
+                   <i class="bi bi-tags"></i>
+                   View Categories
+                </a>
+
+               <a href="categories/create.php" class="list-group-item list-group-item-action">
+                   <i class="bi bi-tag"></i>
+                   Add Category
+                </a>
+
                 <a href="users/index.php" class="list-group-item list-group-item-action">
                     <i class="bi bi-people"></i>
                     View Users
@@ -84,6 +94,43 @@ admin();
                         </div>
                     </div>
                 </div>
+
+                <!-- Add Category -->
+<div class="col-md-6">
+    <div class="card shadow h-100">
+        <div class="card-body text-center">
+
+            <i class="bi bi-tag display-3 text-primary"></i>
+
+            <h4 class="mt-3">Add Category</h4>
+
+            <a href="categories/create.php"
+               class="btn btn-primary mt-3">
+                Add Category
+            </a>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- View Categories -->
+<div class="col-md-6">
+    <div class="card shadow h-100">
+        <div class="card-body text-center">
+
+            <i class="bi bi-tags display-3 text-info"></i>
+
+            <h4 class="mt-3">View Categories</h4>
+
+            <a href="categories/index.php"
+               class="btn btn-info text-white mt-3">
+                View Categories
+            </a>
+
+        </div>
+    </div>
+</div>
 
                 <!-- Add User -->
                 <div class="col-md-6">

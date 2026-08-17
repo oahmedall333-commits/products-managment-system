@@ -5,14 +5,8 @@ include(BASE_PATH."core/database.php");
 function create_product($conn,$name,$description,$price,$stock,$category,$image){
    $sql = "INSERT INTO `products`(name,description,price,stock,cat_id,image)
               values('$name','$description',$price,$stock,'$category','$image') ";
-   $result = mysqli_query($conn,$sql);
-if($result){
-    set_message("success","Product added successfully");
-    return true;
-}else{
-    set_message("danger","failed to added successfully");
-    return false;
-}
+   return mysqli_query($conn,$sql);
+      
 }
 
 function get_all_products(){
@@ -92,5 +86,44 @@ function update_remember_token($conn,$user_id,$token){
 
  function delete_user_by_remember_token($conn,$user_id){
     $sql = "UPDATE `users` SET remember_token = NULL WHERE id = $user_id";
+    return mysqli_query($conn,$sql);
+ }
+
+ // categories
+
+ function create_category($conn,$category_name){
+    $sql = "INSERT INTO `categories` (name) VALUES ('$category_name')";
+    return mysqli_query($conn,$sql);
+ }
+
+ function get_all_categories($conn){
+    $sql = "SELECT * FROM categories ORDER BY id Asc";
+    $result = mysqli_query($conn,$sql);
+    if($result){
+        $categories = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $categories[]=$row;
+        }
+        return $categories;
+    }
+    return [];
+ }
+
+ function get_category_by_id($conn,$id){
+    $sql = "SELECT * FROM categories WHERE id = $id LIMIT 1";
+    $result = mysqli_query($conn,$sql);
+    if($result && mysqli_num_rows($result)>0){
+        return mysqli_fetch_assoc($result);
+    }
+    return null;
+ }
+
+ function Update_category($conn,$name,$id){
+    $sql = "UPDATE categories SET name = '$name' WHERE id = $id";
+    return mysqli_query($conn,$sql);
+ }
+
+ function delete_category($conn,$id){
+    $sql = "DELETE FROM categories WHERE id=$id";
     return mysqli_query($conn,$sql);
  }

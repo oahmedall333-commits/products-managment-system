@@ -166,5 +166,22 @@ function validate_login($email,$password){
  }
 
 
+function validate_category_name($name){
+    if($error = validate_required($name,"category name")){
+        return $error;
+    }
+    if($error = validate_max_length($name,100)){
+        return $error;
+    }
+    if($error = validate_min_length($name,3)){
+        return $error;
+    }
+    return null;
+}
 
+function category_exists($conn,$name){
+    $sql = "SELECT id FROM categories WHERE name = '$name'";
+    $result = mysqli_query($conn,$sql);
+    return ($result && mysqli_num_rows($result));
+}
 // end validate user register
